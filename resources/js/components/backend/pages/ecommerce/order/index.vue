@@ -71,7 +71,7 @@ export default {
 
          // Our method to GET results from a Laravel endpoint
         loadorders(page = 1) {
-            axios.get('/api/order?page=' + page)
+            axios.get('/api/orders?page=' + page)
                 .then(response => {
                     this.orders = response.data;
                 });

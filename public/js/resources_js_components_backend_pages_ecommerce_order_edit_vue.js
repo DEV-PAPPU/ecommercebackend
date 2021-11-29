@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var id = this.$route.params.id;
-      axios.get("/api/order/".concat(id, "/edit")).then(function (response) {
+      axios.get("/api/order/".concat(id)).then(function (response) {
         _this2.shipping = response.data[0];
         var order = response.data[0];
         _this2.form.status = order.status;

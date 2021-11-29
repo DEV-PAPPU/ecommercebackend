@@ -53,7 +53,7 @@ export default [
 
             },
              {
-                path: '/orders/edit/:id',
+                path: '/order/:id',
                 name: 'order-edit',
                 component: () => import("../components/backend/pages/ecommerce/order/edit.vue"),
 

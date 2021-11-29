@@ -137,15 +137,9 @@ class OrderController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+    public function single_order($id)
     {
-        $order_id = $order->id;
+        $order_id = $id;
         $order_items = OrderItems::with('product')->where('order_id','=',$order_id)->get();
         // $order_items = OrderItems::where('order_id','=',$order_id)->get();
 

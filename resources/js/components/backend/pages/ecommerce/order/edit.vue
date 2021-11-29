@@ -155,7 +155,7 @@
 
         loadorder(){
             let id = this.$route.params.id;
-            axios.get(`/api/order/${id}/edit`).then(response => {
+            axios.get(`/api/order/${id}`).then(response => {
                 this.shipping = response.data[0];
                 let order = response.data[0];
                 this.form.status = order.status;

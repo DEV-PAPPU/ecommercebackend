@@ -45,7 +45,6 @@ const store = new Vuex.Store({
         SET_TOAST_MASSAGE(state,data){
             state.Toastmassage = data;
         },
-
     },
     actions:{
       authUser ({ commit, dispatch }) {

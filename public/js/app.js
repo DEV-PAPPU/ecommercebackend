@@ -2115,7 +2115,7 @@ __webpack_require__.r(__webpack_exports__);
       return __webpack_require__.e(/*! import() */ "resources_js_components_backend_pages_ecommerce_order_index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/backend/pages/ecommerce/order/index.vue */ "./resources/js/components/backend/pages/ecommerce/order/index.vue"));
     }
   }, {
-    path: '/orders/edit/:id',
+    path: '/order/:id',
     name: 'order-edit',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_backend_pages_ecommerce_order_edit_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/backend/pages/ecommerce/order/edit.vue */ "./resources/js/components/backend/pages/ecommerce/order/edit.vue"));

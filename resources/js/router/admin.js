@@ -64,6 +64,12 @@ export default [
                 component: () => import("../components/backend/pages/ecommerce/coupon/coupon.vue"),
 
             },
+             {
+                path: '/slider',
+                name: 'slider',
+                component: () => import("../components/backend/pages/slider/index.vue"),
+
+            },
         ]
     },
 ]

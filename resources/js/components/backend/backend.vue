@@ -43,9 +43,9 @@
                         <router-link :to="{name: 'coupon'}" class="">
                             <i class="las la-hand-point-right"></i><span class="menuText">Coupon</span></router-link>
                     </li>
-
                     <li>
-                        <button @click="pdf"> <i class="las la-hand-point-right"></i>PDF Download</button>
+                        <router-link :to="{name: 'slider'}" class="">
+                            <i class="las la-hand-point-right"></i><span class="menuText">Slider</span></router-link>
                     </li>
 
                     <li>

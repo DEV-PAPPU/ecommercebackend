@@ -12,12 +12,14 @@ use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\UserProfileController;
 use App\Http\Controllers\backend\SocialAuthController;
+use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\frontend\ShopController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\WebproductController;
 use App\Http\Controllers\AuthSanctumController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,12 @@ use App\Http\Controllers\PDFController;
 |
 */
 
+    //------------------------------- User  Login Register--------------------------\\
+    //------------------------------------------------------------------\\
+    Route::get('sliders', [SliderController::class, 'index']);
+    Route::post('add-slider', [SliderController::class, 'store']);
+    Route::post('slider-delete/{id}', [SliderController::class, 'destroy']);
+
     //------------------------------- User  Logout --------------------------\\
     //------------------------------------------------------------------\\
     Route::middleware('auth:sanctum')->get('user', function (Request $request) {
@@ -38,8 +46,8 @@ use App\Http\Controllers\PDFController;
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('logout', [AuthSanctumController::class, 'logout']);
+        Route::get('profile', [AuthSanctumController::class, 'profile']);
     });
-
 
 
     //------------------------------- User  Login Register--------------------------\\
@@ -51,6 +59,14 @@ use App\Http\Controllers\PDFController;
 
     //------------------------------- Jwt Auth Route --------------------------\\
     //------------------------------------------------------------------\\
+    Route::group(['prefix' => 'auth'], function ($router) {
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::get('/profile', [AuthController::class, 'userProfile']);    
+
+
+    });
+
     Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/refresh', [AuthController::class, 'refresh']);
@@ -78,7 +94,7 @@ use App\Http\Controllers\PDFController;
     //------------------------------------------------------------------\\
     Route::get('category', [CategoryController::class, 'index']);
     Route::post('category-create', [CategoryController::class, 'store']);
-    Route::post('category/delete/{id}', [CategoryController::class, 'destroy']);
+    Route::post('categorydelete/{id}', [CategoryController::class, 'destroy']);
     Route::post('category/update/{id}', [CategoryController::class, 'update']);
 
 
@@ -98,6 +114,7 @@ use App\Http\Controllers\PDFController;
     //------------------------------------------------------------------\\
     Route::get('orders',[OrderController::class,'index']);
     Route::get('order/{id}',[OrderController::class,'single_order']);
+    Route::get('order-generate-pdf/{id}',[OrderController::class,'order_pdf_download']);
 
 
 
@@ -115,7 +132,7 @@ use App\Http\Controllers\PDFController;
     //------------------------------------------------------------------\\
     Route::get('shop',[ShopController::class,'products']);
     Route::get('product-category',[ShopController::class,'category']);
-    Route::get('public/category',[ShopController::class,'product_Category']);
+    Route::get('frontend-home-category',[ShopController::class,'product_Category']);
     Route::get('category/single/{slug}',[ShopController::class,'Category_single']);
     Route::get('product-single/{slug}',[ShopController::class,'Product_single']);
     Route::post('product-filter',[ShopController::class,'Product_filter']);
@@ -132,7 +149,7 @@ use App\Http\Controllers\PDFController;
     Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('/user-orders',[UserProfileController::class,'User_Orders']);
-        Route::get('order/{id}',[UserProfileController::class,'Single_Order']);
+        Route::get('user-order/{id}',[UserProfileController::class,'Single_Order']);
     });
 
 
@@ -168,4 +185,5 @@ use App\Http\Controllers\PDFController;
     Route::get('login/github/callback', [SocialAuthController::class, 'handleGithubCallback'])->where('provider', '.*');
 
     Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+
 

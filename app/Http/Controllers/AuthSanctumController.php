@@ -40,11 +40,13 @@ class AuthSanctumController extends Controller
 
     public function login(Request $request)
     {
+        
         // return $request;
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
 
         $user = User::where('email', $request->email)->first();
 
@@ -76,12 +78,11 @@ class AuthSanctumController extends Controller
     }
 
 
-    public function user_profile()
+    public function profile()
     {
         $user = Auth()->user();
         return response()->json([
-            'user' => $user,
-            'msg' => ' Successfull'
+            'data' => $user,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 use Auth;
 use Cart;
+use PDF;
 use App\Models\Order;
 use App\Models\OrderItems;
 use App\Models\Coupon;
@@ -140,11 +141,18 @@ class OrderController extends Controller
     public function single_order($id)
     {
         $order_id = $id;
+        $order = Order::find($id);
+        
         $order_items = OrderItems::with('product')->where('order_id','=',$order_id)->get();
         // $order_items = OrderItems::where('order_id','=',$order_id)->get();
 
         if($order){
-            return response()->json([$order, $order_items], 200);
+
+            return response()->json([
+                'order' => $order,
+                'products' => $order_items
+            ], 200);
+
         }else {
             return response()->json('failed', 404);
         }
@@ -312,6 +320,26 @@ class OrderController extends Controller
             'massage' => 'success'
         ], 200);
 
+    }
+
+    public function order_pdf_download($id){
+      
+        $order_id = $id;
+        
+        $order = Order::find($id);
+        
+        $order_items = OrderItems::with('product')->where('order_id','=',$order_id)->get();
+       
+        $data = [
+            'title' => 'Order Invoice',
+            'date' => date('m/d/Y'),
+            'order' => $order,
+            'products' => $order_items
+        ];
+          
+        $pdf = PDF::loadView('myPDF', $data);
+    
+        return $pdf->download('order.pdf');
     }
 
 }

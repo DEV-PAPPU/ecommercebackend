@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\frontend\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,24 @@ use App\Http\Controllers\PDFController;
 |
 */
 Route::get('generate-pdf', [PDFController::class, 'generatePDF']);
+Route::get('left',[ShopController::class,'left_test']);
+
 
 Route::get('/mail', function () {
     return view('email_templates.order_status');
+});
+Route::get('/php', function () {
+   
+    
+    try {
+        $error = 'Always throw this error';
+        throw new Exception($error);      
+        echo 'Never executed';
+    }catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+    
+    echo 'Hello World';
 });
 
 

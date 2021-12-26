@@ -2,6 +2,11 @@
 <html>
 <head>
     <title>Hi</title>
+    <style>
+      table, th, td {
+        border: 1px solid #666;
+      }
+    </style>
 </head>
 <body>
     <h1>{{ $title }}</h1>
@@ -12,5 +17,25 @@
     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
     proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    {{$order}}
+    <!-- products -->
+    <div class="products">
+        <table style="width:80%;">
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+            </tr>
+            @foreach ( $products as $product)
+            <tr>
+                <td>{{$product->product->title}}</td>
+                <td>$ {{$product->price}}</td>
+                <td>$ {{$product->quantity}}</td>
+                <td>$ {{$product->price * $product->quantity}}</td>
+            </tr>
+            @endforeach
+        </table>
+    </div>
 </body>
 </html>

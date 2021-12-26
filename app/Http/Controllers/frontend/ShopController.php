@@ -7,13 +7,13 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
-
+use DB;
 class ShopController extends Controller
 {
     public function products()
     {
         //Status 0 == publish
-        $products = Product::where('status',0)->get();
+        $products = Product::where('status',0)->latest()->get();
         return response()->json($products, 200);
     }
 
@@ -105,7 +105,26 @@ class ShopController extends Controller
     public function category(){
         $categories = Category::latest()->select(['id', 'name'])->get();
         return response()->json($categories, 200);
+    }
 
+    public function left_test(){
+       
+        $users = '';
+        try {
+         $users = DB::table('users')
+                    ->leftJoin('products', 'users.id', '=', 'products.user_id')
+                    ->groupBy('name')
+                    ->where(function($query){
+                        $query->where('products.status', '=', 0);
+                       })
+                    ->select('name','users.id', 'email', 'title')
+                    ->get();
+
+        }catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+        
+        return $users;
 
     }
 }

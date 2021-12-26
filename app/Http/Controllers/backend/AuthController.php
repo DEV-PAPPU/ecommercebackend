@@ -18,6 +18,15 @@ class AuthController extends Controller
      * @return void
      */
 
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
     /**
      * Get a JWT via given credentials.
      *
@@ -25,19 +34,37 @@ class AuthController extends Controller
      */
     public function login(Request $request){
 
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
+    	// return $request;
 
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email',
+        //     'password' => 'required|string|min:6',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json($validator->errors(), 422);
+        // }
+
+        // if (! $token = auth()->attempt($validator->validated())) {
+        //     return response()->json(['errors' => $validator->errors()->add('email', 'Email or Password Invalid !')]);
+        // }
+
+        // return $this->createNewToken($token);
+
+        $this->validateLogin($request);
+        $credentials = request(['email', 'password']);
+
+        if (!$token = auth('api')->attempt($credentials)) {
+            return response()->json([
+                'errors' => [
+                    'account' => [
+                        "Invalid phone number or password"
+                    ]
+                ]
+            ], 422);
         }
 
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['errors' => $validator->errors()->add('email', 'Email or Password Invalid !')]);
-        }
-
+        // return $this->respondWithToken($token);
         return $this->createNewToken($token);
 
     }
@@ -120,8 +147,11 @@ class AuthController extends Controller
     public function userProfile() {
 
         // $user = $this->createNewToken(auth()->refresh());
+        $user = auth()->user();
 
-        return response()->json(auth()->user());
+        return response()->json([
+            'user' => $user]
+        );
     }
 
     /**

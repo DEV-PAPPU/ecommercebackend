@@ -1183,12 +1183,16 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("li", [
-              _c("button", { on: { click: _vm.pdf } }, [
-                _c("i", { staticClass: "las la-hand-point-right" }),
-                _vm._v("PDF Download")
-              ])
-            ]),
+            _c(
+              "li",
+              [
+                _c("router-link", { attrs: { to: { name: "slider" } } }, [
+                  _c("i", { staticClass: "las la-hand-point-right" }),
+                  _c("span", { staticClass: "menuText" }, [_vm._v("Slider")])
+                ])
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("li", [
               _c(

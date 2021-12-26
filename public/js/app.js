@@ -2024,12 +2024,12 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-axios.defaults.withCredentials = true; // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true;
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.axios.defaults.headers.common = {
+//     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+//     'X-Requested-With': 'XMLHttpRequest'
+//  };
 
-window.axios.defaults.headers.common = {
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-  'X-Requested-With': 'XMLHttpRequest'
-};
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -2125,6 +2125,12 @@ __webpack_require__.r(__webpack_exports__);
     name: 'coupon',
     component: function component() {
       return __webpack_require__.e(/*! import() */ "resources_js_components_backend_pages_ecommerce_coupon_coupon_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/backend/pages/ecommerce/coupon/coupon.vue */ "./resources/js/components/backend/pages/ecommerce/coupon/coupon.vue"));
+    }
+  }, {
+    path: '/slider',
+    name: 'slider',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ "resources_js_components_backend_pages_slider_index_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../components/backend/pages/slider/index.vue */ "./resources/js/components/backend/pages/slider/index.vue"));
     }
   }]
 }]);
@@ -76485,7 +76491,7 @@ var index = {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_assets_loadingAnimation_vue":1,"resources_js_components_assets_loadingbg_vue":1,"resources_js_components_assets_toast_vue":1,"resources_js_components_auth_register_vue":1,"resources_js_components_auth_login_vue":1,"resources_js_components_auth_profile_vue":1,"resources_js_components_backend_backend_vue":1,"resources_js_components_backend_pages_user_index_vue":1,"resources_js_components_backend_pages_ecommerce_category_index_vue":1,"resources_js_components_backend_pages_ecommerce_product_index_vue":1,"resources_js_components_backend_pages_ecommerce_product_create_vue":1,"resources_js_components_backend_pages_ecommerce_product_edit_vue":1,"resources_js_components_backend_pages_ecommerce_order_index_vue":1,"resources_js_components_backend_pages_ecommerce_order_edit_vue":1,"resources_js_components_backend_pages_ecommerce_coupon_coupon_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_assets_loadingAnimation_vue":1,"resources_js_components_assets_loadingbg_vue":1,"resources_js_components_assets_toast_vue":1,"resources_js_components_auth_register_vue":1,"resources_js_components_auth_login_vue":1,"resources_js_components_auth_profile_vue":1,"resources_js_components_backend_backend_vue":1,"resources_js_components_backend_pages_user_index_vue":1,"resources_js_components_backend_pages_ecommerce_category_index_vue":1,"resources_js_components_backend_pages_ecommerce_product_index_vue":1,"resources_js_components_backend_pages_ecommerce_product_create_vue":1,"resources_js_components_backend_pages_ecommerce_product_edit_vue":1,"resources_js_components_backend_pages_ecommerce_order_index_vue":1,"resources_js_components_backend_pages_ecommerce_order_edit_vue":1,"resources_js_components_backend_pages_ecommerce_coupon_coupon_vue":1,"resources_js_components_backend_pages_slider_index_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

@@ -79,6 +79,10 @@
                             <!-- form start -->
 
                             <div class="card-body">
+                                 <h4>Options</h4>
+                                 <div class="m-3">
+                                   <button @click="downloadPdf" class="-ml-3 btn btn-primary">Invoice PDF</button>
+                                 </div>
                                 <form @submit.prevent="updateorder(status)">
 
                                     <div class="form-group">
@@ -155,12 +159,20 @@
 
         loadorder(){
             let id = this.$route.params.id;
-            axios.get(`/api/order/${id}`).then(response => {
-                this.shipping = response.data[0];
-                let order = response.data[0];
-                this.form.status = order.status;
-                this.order_items = response.data[1];
-                this.Emailform.email = order.email
+            axios.get(`/api/order/${id}`).then(res => {
+               
+                this.shipping = res.data.order;
+                this.order_items = res.data.products;
+               
+                this.form.status = res.data.order.status;
+                this.Emailform.email = res.data.order.email;
+            });
+        },
+
+        downloadPdf(){
+            let id = this.$route.params.id;
+            axios.get(`/api/order-generate-pdf/${id}`).then(res => {
+               
             });
         },
 

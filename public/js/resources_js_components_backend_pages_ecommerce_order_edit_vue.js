@@ -135,6 +135,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -169,13 +173,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var id = this.$route.params.id;
-      axios.get("/api/order/".concat(id)).then(function (response) {
-        _this2.shipping = response.data[0];
-        var order = response.data[0];
-        _this2.form.status = order.status;
-        _this2.order_items = response.data[1];
-        _this2.Emailform.email = order.email;
+      axios.get("/api/order/".concat(id)).then(function (res) {
+        _this2.shipping = res.data.order;
+        _this2.order_items = res.data.products;
+        _this2.form.status = res.data.order.status;
+        _this2.Emailform.email = res.data.order.email;
       });
+    },
+    downloadPdf: function downloadPdf() {
+      var id = this.$route.params.id;
+      axios.get("/api/order-generate-pdf/".concat(id)).then(function (res) {});
     },
     emailsent: function emailsent() {
       var _this3 = this;
@@ -842,6 +849,19 @@ var render = function() {
                     _vm._m(2),
                     _vm._v(" "),
                     _c("div", { staticClass: "card-body" }, [
+                      _c("h4", [_vm._v("Options")]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "m-3" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "-ml-3 btn btn-primary",
+                            on: { click: _vm.downloadPdf }
+                          },
+                          [_vm._v("Invoice PDF")]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "form",
                         {

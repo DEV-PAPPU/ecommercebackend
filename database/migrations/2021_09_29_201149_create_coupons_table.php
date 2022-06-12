@@ -20,7 +20,7 @@ class CreateCouponsTable extends Migration
             $table->string('coupon_type')->nullable();
             $table->string('expiry_date')->nullable();
             $table->string('minimum_cost')->nullable();
-            $table->integer('usage_limit')->nullable();
+            $table->integer('usage limit')->nullable();
             $table->integer('status');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
